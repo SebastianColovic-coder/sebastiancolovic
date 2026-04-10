@@ -2,19 +2,21 @@
 <html>
 <head><title>Photo7</title>
 <style>
-body {margin:0;padding:20px;text-align:center;background:#000;}
-img.retour { 
-  max-width:1200px;
+body {margin:0;overflow:hidden;background:#000;}
+img {
+  width:100vw;
+  height:100vh;
+  object-fit:cover;
   cursor:pointer;
-  transition:transform 0.3s ease;
+  transition:filter 0.3s ease;
 }
-img.retour:hover {transform:scale(1.05);}
+img:hover {filter:brightness(1.1);}
 </style>
 </head>
 <body>
-<!-- CLIC photo7 = RETOUR index.html (photo6) -->
+<!-- TOUTE l'image cliquable = retour -->
 <a href="index.html">
-  <img src="photo7.png" class="retour" alt="Photo7 - Clic retour">
+  <img src="photo7.png" alt="Photo7 - Clic partout retour">
 </a>
 </body>
 </html>
