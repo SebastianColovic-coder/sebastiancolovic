@@ -37,7 +37,7 @@
 <script>
 const video = document.getElementById('maVideo');
 const observer = new IntersectionObserver((entries) => {
-entries.forEach(entry => {
+  entries.forEach(entry => {
     if (entry.isIntersecting) {
       video.play();
     } else {
