@@ -4,23 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sebastian Colovic</title>
-<style>
 <link rel="stylesheet" href="style.css">
+<style>
+/* ZOOM PHOTO6 */
+.zoomphoto6 {
+  max-width:1200px;
+  height:auto;
+  transition: transform 0.4s ease;
+  cursor:pointer;
+  display:block;
+  margin:20px auto;
+}
+.zoomphoto6:hover {
+  transform: scale(1.08);
+}
+</style>
 </head>
 <body>
 <div class="container">
-<!-- VOTRE NOM ICI -->
 <h1>Sebastian Colovic</h1>
-
-<!-- VOTRE BIO ICI --> 
 <p>Artiste plasticien basé à Bruxelles.</p>
 
-<!-- VOS EXPOS ICI -->
-<section>
-</ul>
-</section>
-
-<!-- VOS IMAGES ICI -->
+<!-- IMAGES -->
 <section>
 <img src="Oeuvre1.jpg" alt="Œuvre 1" style="max-width:100%;margin:20px 0;">
 <img src="montage1.png" alt="Montage 1" style="max-width:800px;margin:20px auto;display:block;">
@@ -35,27 +40,26 @@
 <source src="video1.mp4" type="video/mp4">
 </video>
 
+<!-- PHOTO6 ZOOM → photo7 -->
+<div style="text-align:center;margin:40px 0;">
+<a href="photo7.html">
+  <img src="photo6.png" class="zoomphoto6" alt="Photo 6">
+</a>
+</div>
+
+<p><a href="mailto:sebastian.colovic@yahoo.fr">sebastian.colovic@yahoo.fr</a></p>
+</div>
+
+<!-- VIDEO SCRIPT -->
 <script>
 const video = document.getElementById('maVideo');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      video.play().catch(() => {});  // Ignore erreurs auto
-    } else {
-      video.pause();
-    }
+    if (entry.isIntersecting) video.play().catch(() => {});
+    else video.pause();
   });
 });
 observer.observe(video);
 </script>
-</section>
-<div style="text-align:center;margin:20px 0;">
-<a href="photo7.html">
-  <img src="photo6.png">
-</a>
-</div>
-<!-- CONTACT ICI -->
-<p><a href="mailto:sebastian.colovic@yahoo.fr">sebastian.colovic@yahoo.fr</a></p>
-</div>
 </body>
 </html>
