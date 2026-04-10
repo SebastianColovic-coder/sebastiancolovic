@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sebastian Colovic</title>
+<style>
+.zoomphoto {
+  max-width:1200px;
+  transition: transform 0.4s ease;
+  cursor:pointer;
+}
+.zoomphoto:hover {
+  transform: scale(1.08);
+}
+</style>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -50,7 +60,7 @@ observer.observe(video);
 </section>
 <div style="text-align:center;margin:20px 0;">
 <a href="photo7.html">
-  <img src="photo6.png" style="max-width:1200px;cursor:pointer;">
+  <img src="photo6.png" class="zoomphoto">
 </a>
 </div>
 <!-- CONTACT ICI -->
