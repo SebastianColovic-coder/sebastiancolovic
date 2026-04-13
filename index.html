@@ -1,25 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sebastian Colovic</title>
-<link rel="stylesheet" href="style.css">
-<style>
-/* ZOOM PHOTO6 */
-.zoomphoto6 {
-  max-width:1200px;
-  height:auto;
-  transition: transform 0.4s ease;
-  cursor:pointer;
-  display:block;
-  margin:20px auto;
-}
-.zoomphoto6:hover {
-  transform: scale(1.08);
-}
-</style>
-</head>
 <body>
 <div class="container">
 <h1>Sebastian Colovic</h1>
@@ -39,17 +17,20 @@
 <video id="maVideo" autoplay muted loop controls volume="0.35" style="max-width:800px;margin:20px auto;display:block;">
 <source src="video1.mp4" type="video/mp4">
 </video>
-<a href="photo6-full.png">
-  <img src="photo6.png" alt="Photo 6" 
-       style="
-         width:500px;height:500px;
-         object-fit:cover;
-         margin:50px auto;
-         display:block;
-         cursor:zoom-in;
-       ">
-</a>
+
 <!-- PHOTO6 ZOOM → photo7 -->
+<div style="text-align:center;margin:40px 0;">
+<a href="photo7.html">
+<img src="photo6.png" class="zoomphoto6" alt="Photo 6">
+<img src="montage3.png" alt="Montage 3" 
+     style="
+       width:500px;height:500px;
+       object-fit:cover;
+       margin:100px auto 50px auto;
+       display:block;
+       pointer-events:none;
+     ">
+
 <div style="
   text-align:center;
   font-size:16px;
@@ -59,29 +40,21 @@
   line-height:1.2;
   cursor:default;
   white-space:nowrap;
-  text-decoration:none;  ← Anti-souligné
   pointer-events:none;
 ">
   La main comme prolongement direct de la pensée, agissant comme un outil de création et de compréhension du monde
-</div>
+<div style="pointer-events:none;">
+  <img src="montage3.png" alt="Montage 3" 
+       style="width:500px;height:500px;object-fit:cover;margin:100px auto 50px auto;display:block;">
+  
+  <div style="text-align:center;font-size:16px;color:black;max-width:900px;margin:10px auto;line-height:1.2;cursor:default;white-space:nowrap;">
+    La main comme prolongement direct de la pensée, agissant comme un outil de création et de compréhension du monde
+  </div>
 </div>
 
 <p style="text-align:left;margin-left:0;">
-  <a href="mailto:sebastian.colovic@yahoo.fr" style="color:black;text-decoration:none;">
-    sebastian.colovic@yahoo.fr
-  </a>
+  <!-- Ton email ici -->
 </p>
-
-<!-- VIDEO SCRIPT -->
-<script>
-const video = document.getElementById('maVideo');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) video.play().catch(() => {});
-    else video.pause();
-  });
-});
-observer.observe(video);
-</script>
-</body>
-</html>
+<a href="mailto:sebastian.colovic@yahoo.fr" 
+     style="color:black;text-decoration:none;">
+    sebastian.colovic@yahoo.fr
