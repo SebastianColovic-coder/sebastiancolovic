@@ -7,6 +7,93 @@ img[alt="Photo 8"] { cursor:pointer !important; }
 .montage-container {
   display: flex;
   align-items: flex-start;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 40px auto 20px auto;
+}
+.montage-text {
+  flex: 1;
+  padding: 40px 20px 20px 0;
+  background: rgba(255,255,255,0.9);
+  font-family: Georgia, serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  max-width: 380px;
+  margin-top: 40px; /* Décalage vers le bas */
+}
+.montage-image {
+  flex: 1;
+  max-width: 50%;
+}
+@media (max-width: 768px) {
+  .montage-container {
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px auto;
+  }
+  .montage-text {
+    max-width: 100%;
+    padding: 20px;
+    margin-top: 0;
+  }
+  .montage-image {
+    max-width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Sebastian Colovic</h1>
+<p>Artiste plasticien basé à Bruxelles.</p>
+
+<!-- IMAGES -->
+<section>
+<img src="Oeuvre1.jpg" alt="Œuvre 1" style="max-width:100%;margin:20px 0;">
+<div class="montage-container">
+  <div class="montage-text">
+    <p>Une recherche d'un paysage, d'une transformation de la matière. À travers cet espace d'expression, je recherche les signes de l'implicite. Le cadre est un point de départ, comme un espace pictural qui se déploie vers l'extérieur. Ce site est une recherche, une expérimentation qui tend à comprendre le monde à travers sa plasticité.</p>
+  </div>
+  <img src="montage1.png" alt="Montage 1" class="montage-image">
+</div>
+<img src="photo2.jpg" alt="Photo 2" style="width:100%;max-width:1200px;margin:20px auto;display:block;">
+<img src="photo3.png" alt="Photo 3" style="width:500px;height:500px;object-fit:cover;margin:50px auto;display:block;">
+<div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+  <img src="photo61.png" alt="Photo 61" style="width:45%;max-width:800px;margin:10px;">
+  <img src="photo62.png" alt="Photo 62" style="width:45%;max-width:800px;margin:10px;">
+</div>
+<img src="photo5.png" alt="Photo 5" style="width:100%;max-width:400px;margin:20px auto;display:block;">
+<video id="maVideo" autoplay muted loop controls volume="0.35" style="max-width:800px;margin:20px auto;display:block;">
+<source src="video1.mp4" type="video/mp4">
+</video>
+
+<div style="text-align:center;margin:40px 0;">
+  <a href="photo7.html">
+    <img src="photo6.png" class="zoomphoto6" alt="Photo 6" style="width:100%;max-width:1200px;margin:20px auto;display:block;">
+  </a> 
+</div>
+
+<img src="montage3.png" alt="Montage 3" style="width:500px;height:500px;object-fit:cover;margin:100px auto 50px auto;display:block;">
+</div>
+<div style="text-align:center;margin:40px 0;">
+  <a href="photo11.html">
+    <img src="photo8.png" alt="Photo 8" style="width:100%;max-width:1200px;margin:20px auto;display:block;">
+  </a>
+<img src="photo12.png" alt="Photo 12" style="max-width:800px;margin:800px auto;display:block;">
+<img src="photo13.png" alt="Photo 13" style="max-width:800px;margin:20px auto;display:block;">
+<img src="photo15.png" alt="Photo 15" style="width:100%;max-width:1200px;margin:100px auto;display:block;">
+</div>
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+<title>Sebastian Colovic</title>
+<style>
+img[alt="Photo 8"] { cursor:pointer !important; }
+.montage-container {
+  display: flex;
+  align-items: flex-start;
   gap: 20px;
   max-width: 1200px;
   margin: 20px auto;
