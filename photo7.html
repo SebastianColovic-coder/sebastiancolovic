@@ -6,6 +6,39 @@
 body { 
   margin: 0; 
   background: white !important;  /* ✅ FOND BLANC */
+  overflow: auto;  /* ✅ SCROLL si besoin */
+}
+img {
+  width: 100%;
+  max-width: 800px;  /* ✅ PLUS PETITE */
+  height: 500px;     /* ✅ PAYSAGE */
+  object-fit: cover;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+  display: block;
+  margin: 100px auto 100px auto;  /* ✅ CENTRÉE */
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+img:hover { 
+  filter: brightness(1.1); 
+}
+</style>
+</head>
+<body>
+<!-- TOUTE l'image cliquable = retour -->
+<a href="index.html">
+<img src="photo7.png" alt="Photo 7">
+</a>
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+<title>Photo7</title>
+<style>
+body { 
+  margin: 0; 
+  background: white !important;  /* ✅ FOND BLANC */
   overflow: hidden;
 }
 img {
