@@ -16,6 +16,16 @@ img:hover {filter:brightness(1.1);}
 <body>
 <!-- TOUTE l'image cliquable = retour -->
 <a href="index.html">
-<img src="photo7.png" style="width:100%;max-width:700px;margin:20px auto;display:block;"></a>
+<img src="photo7.png" style="
+  width: 100%; 
+  max-width: 900px; 
+  height: 600px;  /* ✅ HAUTEUR FIXE = FORMAT PAYSAGE */
+  object-fit: cover; 
+  background: white;
+  padding: 20px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+">
 </body>
 </html>
