@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Arbres - Sebastian Colovic</title>
+<title>Arbres</title>
 <style>
 body {
   margin: 0;
@@ -25,11 +25,13 @@ body {
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   cursor: pointer;
+  opacity: 1;
 }
 .arbre-img:hover {
   transform: scale(1.02);
+  opacity: 0.7;
 }
 @media (max-width: 768px) {
   .grid-arbre {
