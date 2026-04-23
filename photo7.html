@@ -5,18 +5,18 @@
 <style>
 body { 
   margin: 0; 
-  background: white !important;  /* ✅ FOND BLANC */
-  overflow: auto;  /* ✅ SCROLL si besoin */
+  background: white !important;
+  overflow: auto;
 }
 img {
   width: 100%;
-  max-width: 800px;  /* ✅ PLUS PETITE */
-  height: 500px;     /* ✅ PAYSAGE */
+  max-width: 900px;   /* ✅ LARGEUR > HAUTEUR = PAYSAGE */
+  height: 550px;      /* ✅ FORMAT PAYSAGE */
   object-fit: cover;
   cursor: pointer;
   transition: filter 0.3s ease;
   display: block;
-  margin: 100px auto 100px auto;  /* ✅ CENTRÉE */
+  margin: 100px auto 100px auto;
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
@@ -26,39 +26,8 @@ img:hover {
 </style>
 </head>
 <body>
-<!-- TOUTE l'image cliquable = retour -->
 <a href="index.html">
 <img src="photo7.png" alt="Photo 7">
-</a>
-</body>
-</html><!DOCTYPE html>
-<html>
-<head>
-<title>Photo7</title>
-<style>
-body { 
-  margin: 0; 
-  background: white !important;  /* ✅ FOND BLANC */
-  overflow: hidden;
-}
-img {
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  cursor: pointer;
-  transition: filter 0.3s ease;
-  display: block;
-  margin: 0 auto;
-}
-img:hover { 
-  filter: brightness(1.1); 
-}
-</style>
-</head>
-<body>
-<!-- TOUTE l'image cliquable = retour -->
-<a href="index.html">
-<img src="photo7.png">
 </a>
 </body>
 </html>
