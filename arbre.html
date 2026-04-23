@@ -10,18 +10,13 @@ body {
   font-family: Georgia, serif;
 }
 .container {
-  max-width: 1400px;
+  max-width: 1600px;  /* Plus large pour 4 colonnes */
   margin: 0 auto;
-}
-h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 50px;
 }
 .grid-arbre {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);  /* ✅ 3 COLONNES */
-  grid-template-rows: repeat(6, 250px);   /* ✅ 6 LIGNES */
+  grid-template-columns: repeat(4, 1fr);  /* ✅ 4 COLONNES */
+  grid-template-rows: repeat(5, 220px);   /* 5 lignes */
   gap: 20px;
 }
 .arbre-img {
@@ -49,7 +44,7 @@ h1 {
 }
 @media (max-width: 768px) {
   .grid-arbre {
-    grid-template-columns: 1fr;  /* 1 colonne mobile */
+    grid-template-columns: 1fr;
     grid-template-rows: repeat(18, 200px);
   }
 }
@@ -57,7 +52,6 @@ h1 {
 </head>
 <body>
 <div class="container">
-<h1>Arbres</h1>
 
 <div class="grid-arbre">
   <a href="arbre1.html"><img src="arbre1.png" alt="Arbre 1" class="arbre-img"></a>
