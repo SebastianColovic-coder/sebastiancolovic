@@ -1,38 +1,86 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-  </style>
+<title>Arbres - Sebastian Colovic</title>
+<style>
+body {
+  margin: 0;
+  padding: 40px 20px;
+  background: white;
+  font-family: Georgia, serif;
+}
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 50px;
+}
+.grid-arbre {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* ✅ 3 COLONNES */
+  grid-template-rows: repeat(6, 250px);   /* ✅ 6 LIGNES */
+  gap: 20px;
+}
+.arbre-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.arbre-img:hover {
+  transform: scale(1.02);
+}
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 50px;
+  color: #666;
+  text-decoration: none;
+  font-size: 1.1em;
+}
+.back-link:hover {
+  color: #333;
+}
+@media (max-width: 768px) {
+  .grid-arbre {
+    grid-template-columns: 1fr;  /* 1 colonne mobile */
+    grid-template-rows: repeat(18, 200px);
+  }
+}
+</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="fr"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Votre Nom - Artiste&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="style.css"&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;Votre Nom&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Votre Nom vit et travaille à Bruxelles.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Expositions&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;strong&gt;2026&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Votre expo, Lieu, Ville, Pays.&lt;/em&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;strong&gt;2025&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Autre expo, Autre lieu, Ville.&lt;/em&gt;&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Ajoutez vos expos ici --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<div class="container">
+<h1>Arbres</h1>
+
+<div class="grid-arbre">
+  <a href="arbre1.html"><img src="arbre1.png" alt="Arbre 1" class="arbre-img"></a>
+  <a href="arbre2.html"><img src="arbre2.png" alt="Arbre 2" class="arbre-img"></a>
+  <a href="arbre3.html"><img src="arbre3.png" alt="Arbre 3" class="arbre-img"></a>
+  <a href="arbre4.html"><img src="arbre4.png" alt="Arbre 4" class="arbre-img"></a>
+  <a href="arbre5.html"><img src="arbre5.png" alt="Arbre 5" class="arbre-img"></a>
+  <a href="arbre6.html"><img src="arbre6.png" alt="Arbre 6" class="arbre-img"></a>
+  <a href="arbre7.html"><img src="arbre7.png" alt="Arbre 7" class="arbre-img"></a>
+  <a href="arbre8.html"><img src="arbre8.png" alt="Arbre 8" class="arbre-img"></a>
+  <a href="arbre9.html"><img src="arbre9.png" alt="Arbre 9" class="arbre-img"></a>
+  <a href="arbre10.html"><img src="arbre10.png" alt="Arbre 10" class="arbre-img"></a>
+  <a href="arbre11.html"><img src="arbre11.png" alt="Arbre 11" class="arbre-img"></a>
+  <a href="arbre12.html"><img src="arbre12.png" alt="Arbre 12" class="arbre-img"></a>
+  <a href="arbre13.html"><img src="arbre13.png" alt="Arbre 13" class="arbre-img"></a>
+  <a href="arbre14.html"><img src="arbre14.png" alt="Arbre 14" class="arbre-img"></a>
+  <a href="arbre15.html"><img src="arbre15.png" alt="Arbre 15" class="arbre-img"></a>
+  <a href="arbre16.html"><img src="arbre16.png" alt="Arbre 16" class="arbre-img"></a>
+  <a href="arbre17.html"><img src="arbre17.png" alt="Arbre 17" class="arbre-img"></a>
+  <a href="arbre18.html"><img src="arbre18.png" alt="Arbre 18" class="arbre-img"></a>
+</div>
+
+<a href="index.html" class="back-link">← Retour à l'accueil</a>
+</div>
 </body>
 </html>
