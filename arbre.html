@@ -273,102 +273,107 @@ function goBack() {
 }
 
 const PIXEL_SIZE     = 2;
-const FILL_DURATION  = 50000;   // ms pour recouvrir
-const HOLD_WHITE     = 8000;    // pause blanc
-const CLEAR_DURATION = 50000;   // ms pour révéler
-const HOLD_IMAGE     = 15000;   // pause image visible
+const INITIAL_DELAY  = 5000;   // 5 secondes avant que rien ne commence
+const FILL_DURATION  = 150000; // ~2.5 minutes pour recouvrir
+const HOLD_WHITE     = 20000;  // 20s pause blanc
+const CLEAR_DURATION = 150000; // ~2.5 minutes pour révéler
+const HOLD_IMAGE     = 40000;  // 40s pause image visible
 
-document.querySelectorAll('.arbre-item').forEach(function(item, index) {
-  const canvas = item.querySelector('.pixel-canvas');
-  const ctx    = canvas.getContext('2d');
+setTimeout(function() {
 
-  function resize() {
-    canvas.width  = item.offsetWidth;
-    canvas.height = item.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', function() { resize(); buildGrid(); });
+  document.querySelectorAll('.arbre-item').forEach(function(item, index) {
+    const canvas = item.querySelector('.pixel-canvas');
+    const ctx    = canvas.getContext('2d');
 
-  let grid   = [];
-  let filled = 0;
-  let phase  = 'fill';
-  let lastTime = null;
-  let elapsed  = 0;
-
-  function buildGrid() {
-    const cols = Math.ceil(canvas.width  / PIXEL_SIZE);
-    const rows = Math.ceil(canvas.height / PIXEL_SIZE);
-    const cells = [];
-    for (let r = 0; r < rows; r++)
-      for (let c = 0; c < cols; c++)
-        cells.push({ x: c * PIXEL_SIZE, y: r * PIXEL_SIZE });
-    for (let i = cells.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [cells[i], cells[j]] = [cells[j], cells[i]];
+    function resize() {
+      canvas.width  = item.offsetWidth;
+      canvas.height = item.offsetHeight;
     }
-    grid = cells;
-  }
-  buildGrid();
+    resize();
+    window.addEventListener('resize', function() { resize(); buildGrid(); });
 
-  const totalCycle = FILL_DURATION + HOLD_WHITE + CLEAR_DURATION + HOLD_IMAGE;
+    let grid   = [];
+    let filled = 0;
+    let phase  = 'fill';
+    let lastTime = null;
+    let elapsed  = 0;
 
-  // position initiale décalée selon l'index
-  (function initPhase() {
-    let t = (index / 16) * totalCycle;
-    if (t < FILL_DURATION) {
-      phase = 'fill'; elapsed = t;
-      filled = Math.floor((t / FILL_DURATION) * grid.length);
-    } else {
-      t -= FILL_DURATION;
-      if (t < HOLD_WHITE) {
-        phase = 'holdWhite'; elapsed = t; filled = grid.length;
+    function buildGrid() {
+      const cols = Math.ceil(canvas.width  / PIXEL_SIZE);
+      const rows = Math.ceil(canvas.height / PIXEL_SIZE);
+      const cells = [];
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++)
+          cells.push({ x: c * PIXEL_SIZE, y: r * PIXEL_SIZE });
+      for (let i = cells.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cells[i], cells[j]] = [cells[j], cells[i]];
+      }
+      grid = cells;
+    }
+    buildGrid();
+
+    const totalCycle = FILL_DURATION + HOLD_WHITE + CLEAR_DURATION + HOLD_IMAGE;
+
+    // décalage initial : chaque image est à un stade différent du cycle
+    (function initPhase() {
+      let t = (index / 16) * totalCycle;
+      if (t < FILL_DURATION) {
+        phase = 'fill'; elapsed = t;
+        filled = Math.floor((t / FILL_DURATION) * grid.length);
       } else {
-        t -= HOLD_WHITE;
-        if (t < CLEAR_DURATION) {
-          phase = 'clear'; elapsed = t;
-          filled = Math.max(grid.length - Math.floor((t / CLEAR_DURATION) * grid.length), 0);
+        t -= FILL_DURATION;
+        if (t < HOLD_WHITE) {
+          phase = 'holdWhite'; elapsed = t; filled = grid.length;
         } else {
-          t -= CLEAR_DURATION;
-          phase = 'holdImage'; elapsed = t; filled = 0;
+          t -= HOLD_WHITE;
+          if (t < CLEAR_DURATION) {
+            phase = 'clear'; elapsed = t;
+            filled = Math.max(grid.length - Math.floor((t / CLEAR_DURATION) * grid.length), 0);
+          } else {
+            t -= CLEAR_DURATION;
+            phase = 'holdImage'; elapsed = t; filled = 0;
+          }
         }
       }
-    }
-  })();
+    })();
 
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'white';
-    for (let i = 0; i < filled; i++)
-      ctx.fillRect(grid[i].x, grid[i].y, PIXEL_SIZE, PIXEL_SIZE);
-  }
-
-  function loop(now) {
-    if (!lastTime) lastTime = now;
-    const delta = now - lastTime;
-    lastTime = now;
-    elapsed += delta;
-    const total = grid.length;
-
-    if (phase === 'fill') {
-      filled = Math.min(Math.floor((elapsed / FILL_DURATION) * total), total);
-      if (elapsed >= FILL_DURATION) { filled = total; phase = 'holdWhite'; elapsed = 0; }
-    } else if (phase === 'holdWhite') {
-      filled = total;
-      if (elapsed >= HOLD_WHITE) { buildGrid(); filled = total; phase = 'clear'; elapsed = 0; }
-    } else if (phase === 'clear') {
-      filled = Math.max(total - Math.floor((elapsed / CLEAR_DURATION) * total), 0);
-      if (elapsed >= CLEAR_DURATION) { filled = 0; phase = 'holdImage'; elapsed = 0; }
-    } else if (phase === 'holdImage') {
-      filled = 0;
-      if (elapsed >= HOLD_IMAGE) { buildGrid(); phase = 'fill'; elapsed = 0; }
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'white';
+      for (let i = 0; i < filled; i++)
+        ctx.fillRect(grid[i].x, grid[i].y, PIXEL_SIZE, PIXEL_SIZE);
     }
 
-    draw();
+    function loop(now) {
+      if (!lastTime) lastTime = now;
+      const delta = now - lastTime;
+      lastTime = now;
+      elapsed += delta;
+      const total = grid.length;
+
+      if (phase === 'fill') {
+        filled = Math.min(Math.floor((elapsed / FILL_DURATION) * total), total);
+        if (elapsed >= FILL_DURATION) { filled = total; phase = 'holdWhite'; elapsed = 0; }
+      } else if (phase === 'holdWhite') {
+        filled = total;
+        if (elapsed >= HOLD_WHITE) { buildGrid(); filled = total; phase = 'clear'; elapsed = 0; }
+      } else if (phase === 'clear') {
+        filled = Math.max(total - Math.floor((elapsed / CLEAR_DURATION) * total), 0);
+        if (elapsed >= CLEAR_DURATION) { filled = 0; phase = 'holdImage'; elapsed = 0; }
+      } else if (phase === 'holdImage') {
+        filled = 0;
+        if (elapsed >= HOLD_IMAGE) { buildGrid(); phase = 'fill'; elapsed = 0; }
+      }
+
+      draw();
+      requestAnimationFrame(loop);
+    }
+
     requestAnimationFrame(loop);
-  }
+  });
 
-  requestAnimationFrame(loop);
-});
+}, INITIAL_DELAY);
 </script>
 </body>
 </html>
