@@ -3,23 +3,7 @@
 <head>
 <title>Sebastian Colovic</title>
 <style>
-* {
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  padding: 0;
-}
-.container {
-  padding: 0 20px;
-}
-h1 {
-  font-family: Georgia, serif;
-  padding: 20px 0 0 0;
-}
 img[alt="Photo 8"] { cursor:pointer !important; }
-
-/* --- MONTAGE CONTAINER --- */
 .montage-container {
   display: flex;
   align-items: flex-start;
@@ -42,10 +26,7 @@ img[alt="Photo 8"] { cursor:pointer !important; }
 .montage-image {
   flex: 1;
   max-width: 50%;
-  width: 100%;
 }
-
-/* --- PHOTO3 FLEX --- */
 .photo3-flex {
   display: flex;
   align-items: center;
@@ -59,6 +40,8 @@ img[alt="Photo 8"] { cursor:pointer !important; }
   height: 500px;
   object-fit: cover;
   flex-shrink: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 .photo3-text-right {
   flex: 1;
@@ -68,155 +51,29 @@ img[alt="Photo 8"] { cursor:pointer !important; }
   color: #333;
   padding: 20px;
   text-align: justify;
-  font-family: Georgia, serif;
 }
-
-/* --- PHOTOS ROW --- */
 .photos-row {
   display: flex;
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
 }
-
-/* --- IMAGES PLEINE LARGEUR --- */
-.img-full {
-  width: 100%;
-  max-width: 1200px;
-  margin: 20px auto;
-  display: block;
-}
-.img-full-spaced {
-  width: 100%;
-  max-width: 1200px;
-  margin: 100px auto;
-  display: block;
-}
-.img-medium {
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
-  display: block;
-}
-.img-small {
-  width: 100%;
-  max-width: 400px;
-  margin: 20px auto;
-  display: block;
-}
-.img-square {
-  width: 500px;
-  height: 500px;
-  object-fit: cover;
-  margin: 100px auto 50px auto;
-  display: block;
-}
-.img-photo12 {
-  max-width: 800px;
-  width: 100%;
-  margin: 1000px auto;
-  display: block;
-}
-
-/* --- VIDEO --- */
-.video-wrap {
-  max-width: 800px;
-  margin: 20px auto;
-  display: block;
-  width: 100%;
-}
-
-/* ===================== MOBILE ===================== */
 @media (max-width: 768px) {
-
-  .container {
-    padding: 0 12px;
-  }
-
-  /* Montage : empilé */
-  .montage-container {
+  .montage-container, .photo3-flex {
     flex-direction: column;
     gap: 20px;
     margin: 20px auto;
   }
   .montage-text {
     max-width: 100%;
-    padding: 16px 0;
+    padding: 20px;
     margin-top: 0;
   }
-  .montage-image {
+  .montage-image, .photo3-centered {
     max-width: 100%;
   }
-
-  /* Photo3 : empilé */
-  .photo3-flex {
-    flex-direction: column;
-    gap: 20px;
-    margin: 50px auto;
-    width: 100%;
-  }
-  .photo3-centered {
-    width: 100%;
-    height: 300px;
-  }
-  .photo3-text-right {
-    max-width: 100%;
-    padding: 0;
-  }
-
-  /* Photos row : colonne */
   .photos-row {
     flex-direction: column;
-    align-items: center;
-  }
-  .photos-row img {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 10px 0 !important;
-  }
-
-  /* Images pleine largeur : marge sur les côtés */
-  .img-full,
-  .img-full-spaced {
-    width: calc(100% - 0px);
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .img-full { margin-top: 16px; margin-bottom: 16px; }
-  .img-full-spaced { margin-top: 50px; margin-bottom: 50px; }
-
-  .img-medium {
-    width: 100%;
-    max-width: 100%;
-  }
-  .img-small {
-    width: 100%;
-    max-width: 100%;
-  }
-  .img-square {
-    width: 100%;
-    height: 300px;
-    margin: 50px auto 30px auto;
-  }
-
-  /* Photo12 : garder le grand espace narratif, réduire un peu */
-  .img-photo12 {
-    margin-top: 400px;
-    margin-bottom: 400px;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Vidéo avec marge */
-  .video-wrap {
-    width: calc(100% - 40px);
-    margin: 20px auto;
-  }
-
-  /* Liens images */
-  div[style*="text-align:center"] {
-    margin: 20px 0 !important;
   }
 }
 </style>
@@ -224,27 +81,26 @@ img[alt="Photo 8"] { cursor:pointer !important; }
 <body>
 <div class="container">
 <h1>Sebastian Colovic</h1>
-<p style="font-family:Georgia,serif;">Artiste plasticien basé à Bruxelles.</p>
+<p>Artiste plasticien basé à Bruxelles.</p>
 
 <!-- IMAGES -->
 <section>
-
-<img src="Oeuvre1.jpg" alt="Œuvre 1" class="img-full">
+<img src="Oeuvre1.jpg" alt="Œuvre 1" style="max-width:100%;margin:20px 0;">
 
 <div class="montage-container">
   <div class="montage-text">
-    <p>Je mène une recherche de paysage sensible, cherchant à saisir l'instant où la matière se transforme. Les signes implicites agissent comme un moteur créatif, à condition d'être rendus visibles. Le cadre n'est pas une limite mais un point de départ, un espace pictural qui se déploie et se matérialise vers l'extérieur. Ce site est une expérimentation visant à comprendre le monde à travers sa plasticité, dans ses états de transition et de mutation.</p>
+    <p>Je mène une recherche de paysage sensible, cherchant à saisir l’instant où la matière se transforme. Les signes implicites agissent comme un moteur créatif, à condition d’être rendus visibles. Le cadre n’est pas une limite mais un point de départ, un espace pictural qui se déploie et se matérialise vers l’extérieur. Ce site est une expérimentation visant à comprendre le monde à travers sa plasticité, dans ses états de transition et de mutation.</p>
   </div>
   <img src="montage1.png" alt="Montage 1" class="montage-image">
 </div>
 
-<img src="montage4.jpg" alt="montage 4" class="img-full" style="max-width:1200px;margin-top:40px;margin-bottom:40px;">
+<img src="montage4.jpg" alt="montage 4" style="width:100%;max-width:1200px;margin:40px auto;display:block;">
 
 <!-- PHOTO3 CENTRÉE + TEXTE À DROITE -->
 <div class="photo3-flex">
   <img src="photo3.png" alt="Photo 3" class="photo3-centered">
   <div class="photo3-text-right">
-    Un rêve, comme le rappel diffus de ce que nous sommes : une surface transparente où affleurent des bribes d'idées. La matière y devient le support d'une mémoire instable, en train de se faire. Les couches s'accumulent, se déplacent, se superposent, révélant par intermittence des traces, des fragments sans origine fixe.
+    Un rêve, comme le rappel diffus de ce que nous sommes : une surface transparente où affleurent des bribes d’idées. La matière y devient le support d’une mémoire instable, en train de se faire. Les couches s’accumulent, se déplacent, se superposent, révélant par intermittence des traces, des fragments sans origine fixe.
   </div>
 </div>
 
@@ -253,34 +109,30 @@ img[alt="Photo 8"] { cursor:pointer !important; }
   <img src="photo62.png" alt="Photo 62" style="width:45%;max-width:800px;margin:40px;">
 </div>
 
-<img src="photo5.png" alt="Photo 5" class="img-small">
+<img src="photo5.png" alt="Photo 5" style="width:100%;max-width:400px;margin:20px auto;display:block;">
 
-<video id="maVideo" autoplay muted loop controls class="video-wrap">
-  <source src="video1.mp4" type="video/mp4">
+<video id="maVideo" autoplay muted loop controls volume="0.35" style="max-width:800px;margin:20px auto;display:block;">
+<source src="video1.mp4" type="video/mp4">
 </video>
 
 <div style="text-align:center;margin:40px 0;">
   <a href="photo7.html">
-    <img src="photo6.png" alt="Photo 6" class="img-full">
-  </a>
+    <img src="photo6.png" class="zoomphoto6" alt="Photo 6" style="width:100%;max-width:1200px;margin:20px auto;display:block;">
+  </a> 
 </div>
 
-<img src="montage3.png" alt="Montage 3" class="img-square">
+<img src="montage3.png" alt="Montage 3" style="width:500px;height:500px;object-fit:cover;margin:100px auto 50px auto;display:block;">
 
 <div style="text-align:center;margin:40px 0;">
   <a href="photo11.html">
-    <img src="photo8.png" alt="Photo 8" class="img-full">
+    <img src="photo8.png" alt="Photo 8" style="width:100%;max-width:1200px;margin:20px auto;display:block;">
   </a>
 </div>
 
-<img src="photo12.png" alt="Photo 12" class="img-photo12">
-<img src="photo13.png" alt="Photo 13" class="img-medium">
-
+<img src="photo12.png" alt="Photo 12" style="max-width:800px;margin:1000px auto;display:block;">
+<img src="photo13.png" alt="Photo 13" style="max-width:800px;margin:20px auto;display:block;">
 <a href="arbre.html">
-  <img src="photo15.png" alt="Photo 15" class="img-full-spaced">
-</a>
-
-</section>
-</div>
+  <img src="photo15.png" alt="Photo 15" style="width:100%;max-width:1200px;margin:100px auto;display:block;">
+</a></div>
 </body>
 </html>
