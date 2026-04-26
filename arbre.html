@@ -38,40 +38,43 @@ body {
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
   background: transparent;
 }
+
+/* Le scroll-container contient deux spans identiques côte à côte.
+   On anime de 0 à -50% : quand le premier bloc sort, le second prend
+   exactement sa place — boucle parfaite, sans pause ni saut. */
 .scroll-container {
+  display: flex;
   white-space: nowrap;
   animation: scroll-loop 90s linear infinite;
 }
 .scroll-text {
   display: inline-block;
+  flex-shrink: 0;
   font-size: 14px;
   font-weight: bold;
   color: white;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  padding-right: 60px; /* espace entre les deux répétitions */
 }
+
 @keyframes scroll-loop {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-360%);
-  }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* NIVEAUX VERTICAUX VARIÉS */
-.arbre-item:nth-child(1) .arbre-overlay  { top: 20%; }
-.arbre-item:nth-child(2) .arbre-overlay  { top: 55%; }
-.arbre-item:nth-child(3) .arbre-overlay  { top: 75%; }
-.arbre-item:nth-child(4) .arbre-overlay  { top: 35%; }
-.arbre-item:nth-child(5) .arbre-overlay  { top: 65%; }
-.arbre-item:nth-child(6) .arbre-overlay  { top: 25%; }
-.arbre-item:nth-child(7) .arbre-overlay  { top: 50%; }
-.arbre-item:nth-child(8) .arbre-overlay  { top: 80%; }
-.arbre-item:nth-child(9) .arbre-overlay  { top: 40%; }
+.arbre-item:nth-child(1)  .arbre-overlay { top: 20%; }
+.arbre-item:nth-child(2)  .arbre-overlay { top: 55%; }
+.arbre-item:nth-child(3)  .arbre-overlay { top: 75%; }
+.arbre-item:nth-child(4)  .arbre-overlay { top: 35%; }
+.arbre-item:nth-child(5)  .arbre-overlay { top: 65%; }
+.arbre-item:nth-child(6)  .arbre-overlay { top: 25%; }
+.arbre-item:nth-child(7)  .arbre-overlay { top: 50%; }
+.arbre-item:nth-child(8)  .arbre-overlay { top: 80%; }
+.arbre-item:nth-child(9)  .arbre-overlay { top: 40%; }
 .arbre-item:nth-child(10) .arbre-overlay { top: 70%; }
 .arbre-item:nth-child(11) .arbre-overlay { top: 15%; }
 .arbre-item:nth-child(12) .arbre-overlay { top: 60%; }
@@ -81,22 +84,22 @@ body {
 .arbre-item:nth-child(16) .arbre-overlay { top: 22%; }
 
 /* DÉCALAGES ANIMATION */
-.arbre-item:nth-child(1) .scroll-container  { animation-delay: 0s; }
-.arbre-item:nth-child(2) .scroll-container  { animation-delay: -2s; }
-.arbre-item:nth-child(3) .scroll-container  { animation-delay: -5s; }
-.arbre-item:nth-child(4) .scroll-container  { animation-delay: -9s; }
-.arbre-item:nth-child(5) .scroll-container  { animation-delay: -13s; }
-.arbre-item:nth-child(6) .scroll-container  { animation-delay: -17s; }
-.arbre-item:nth-child(7) .scroll-container  { animation-delay: -21s; }
-.arbre-item:nth-child(8) .scroll-container  { animation-delay: -25s; }
-.arbre-item:nth-child(9) .scroll-container  { animation-delay: -29s; }
-.arbre-item:nth-child(10) .scroll-container { animation-delay: -1s; }
-.arbre-item:nth-child(11) .scroll-container { animation-delay: -4s; }
-.arbre-item:nth-child(12) .scroll-container { animation-delay: -8s; }
-.arbre-item:nth-child(13) .scroll-container { animation-delay: -12s; }
-.arbre-item:nth-child(14) .scroll-container { animation-delay: -16s; }
-.arbre-item:nth-child(15) .scroll-container { animation-delay: -20s; }
-.arbre-item:nth-child(16) .scroll-container { animation-delay: -24s; }
+.arbre-item:nth-child(1)  .scroll-container { animation-delay: 0s; }
+.arbre-item:nth-child(2)  .scroll-container { animation-delay: -6s; }
+.arbre-item:nth-child(3)  .scroll-container { animation-delay: -12s; }
+.arbre-item:nth-child(4)  .scroll-container { animation-delay: -18s; }
+.arbre-item:nth-child(5)  .scroll-container { animation-delay: -24s; }
+.arbre-item:nth-child(6)  .scroll-container { animation-delay: -30s; }
+.arbre-item:nth-child(7)  .scroll-container { animation-delay: -36s; }
+.arbre-item:nth-child(8)  .scroll-container { animation-delay: -42s; }
+.arbre-item:nth-child(9)  .scroll-container { animation-delay: -48s; }
+.arbre-item:nth-child(10) .scroll-container { animation-delay: -54s; }
+.arbre-item:nth-child(11) .scroll-container { animation-delay: -60s; }
+.arbre-item:nth-child(12) .scroll-container { animation-delay: -66s; }
+.arbre-item:nth-child(13) .scroll-container { animation-delay: -72s; }
+.arbre-item:nth-child(14) .scroll-container { animation-delay: -78s; }
+.arbre-item:nth-child(15) .scroll-container { animation-delay: -84s; }
+.arbre-item:nth-child(16) .scroll-container { animation-delay: -3s; }
 
 .arbre-img:hover {
   transform: scale(1.02);
@@ -112,7 +115,7 @@ body {
     font-size: 11px;
   }
   .scroll-container {
-    animation: scroll-loop 80s linear infinite;
+    animation-duration: 80s;
   }
 }
 </style>
@@ -125,11 +128,8 @@ body {
     <img src="arbre1.png" alt="Arbre 1" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -138,11 +138,8 @@ body {
     <img src="arbre2.png" alt="Arbre 2" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -151,11 +148,8 @@ body {
     <img src="arbre3.png" alt="Arbre 3" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -164,11 +158,8 @@ body {
     <img src="arbre4.png" alt="Arbre 4" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -177,11 +168,8 @@ body {
     <img src="arbre5.png" alt="Arbre 5" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -190,11 +178,8 @@ body {
     <img src="arbre6.png" alt="Arbre 6" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -203,11 +188,8 @@ body {
     <img src="arbre7.png" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -216,11 +198,8 @@ body {
     <img src="arbre8.png" alt="Arbre 8" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -229,11 +208,8 @@ body {
     <img src="arbre9.png" alt="Arbre 9" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -242,11 +218,8 @@ body {
     <img src="arbre10.png" alt="Arbre 10" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -255,11 +228,8 @@ body {
     <img src="arbre11.png" alt="Arbre 11" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -268,11 +238,8 @@ body {
     <img src="arbre12.png" alt="Arbre 12" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -281,11 +248,8 @@ body {
     <img src="arbre13.png" alt="Arbre 13" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -294,11 +258,8 @@ body {
     <img src="arbre14.png" alt="Arbre 14" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -307,11 +268,8 @@ body {
     <img src="arbre15.png" alt="Arbre 15" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
@@ -320,11 +278,8 @@ body {
     <img src="arbre16.png" alt="Arbre 16" class="arbre-img">
     <div class="arbre-overlay">
       <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
-          Avec le temps les paysages avancent Avec le temps les paysages avancent
-        </span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
+        <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       </div>
     </div>
   </a>
