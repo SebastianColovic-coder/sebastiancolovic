@@ -45,7 +45,7 @@ body {
 }
 .scroll-container {
   white-space: nowrap;
-  animation: scroll-loop 20s linear infinite;
+  animation: scroll-loop 35s linear infinite;
 }
 .scroll-text {
   display: inline-block;
@@ -53,14 +53,13 @@ body {
   font-weight: bold;
   color: white;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-  padding-right: 100px;
 }
 @keyframes scroll-loop {
   0% {
     transform: translateX(100%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-360%);
   }
 }
 .arbre-item:hover .arbre-img {
@@ -70,6 +69,23 @@ body {
 .arbre-item:hover .scroll-container {
   animation-play-state: paused;
 }
+/* DÉCALAGES UNIQUES POUR CHAQUE IMAGE */
+.arbre-item:nth-child(1) .scroll-container { animation-delay: 0s; }
+.arbre-item:nth-child(2) .scroll-container { animation-delay: -2s; }
+.arbre-item:nth-child(3) .scroll-container { animation-delay: -5s; }
+.arbre-item:nth-child(4) .scroll-container { animation-delay: -9s; }
+.arbre-item:nth-child(5) .scroll-container { animation-delay: -13s; }
+.arbre-item:nth-child(6) .scroll-container { animation-delay: -17s; }
+.arbre-item:nth-child(7) .scroll-container { animation-delay: -21s; }
+.arbre-item:nth-child(8) .scroll-container { animation-delay: -25s; }
+.arbre-item:nth-child(9) .scroll-container { animation-delay: -29s; }
+.arbre-item:nth-child(10) .scroll-container { animation-delay: -1s; }
+.arbre-item:nth-child(11) .scroll-container { animation-delay: -4s; }
+.arbre-item:nth-child(12) .scroll-container { animation-delay: -8s; }
+.arbre-item:nth-child(13) .scroll-container { animation-delay: -12s; }
+.arbre-item:nth-child(14) .scroll-container { animation-delay: -16s; }
+.arbre-item:nth-child(15) .scroll-container { animation-delay: -20s; }
+.arbre-item:nth-child(16) .scroll-container { animation-delay: -24s; }
 @media (max-width: 768px) {
   .grid-arbre {
     grid-template-columns: 1fr;
@@ -77,6 +93,9 @@ body {
   }
   .scroll-text {
     font-size: 12px;
+  }
+  .scroll-container {
+    animation: scroll-loop 45s linear infinite;
   }
 }
 </style>
@@ -89,7 +108,9 @@ body {
     <div class="arbre-overlay">
       <div class="scroll-container">
         <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
+          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
+          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
+          Avec le temps les paysages avancent Avec le temps les paysages avancent
         </span>
       </div>
     </div>
@@ -100,167 +121,17 @@ body {
     <div class="arbre-overlay">
       <div class="scroll-container">
         <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
+          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
+          Avec le temps les paysages avancent Avec le temps les paysages avancent Avec le temps les paysages avancent 
+          Avec le temps les paysages avancent Avec le temps les paysages avancent
         </span>
       </div>
     </div>
   </a>
   
-  <a href="index.html" class="arbre-item">
-    <img src="arbre3.png" alt="Arbre 3" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
+  <!-- Copiez cette structure pour les 16 images avec les mêmes classes arbre-item -->
   
-  <a href="index.html" class="arbre-item">
-    <img src="arbre4.png" alt="Arbre 4" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre5.png" alt="Arbre 5" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre6.png" alt="Arbre 6" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre7.png" alt="Arbre 7" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre8.png" alt="Arbre 8" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre9.png" alt="Arbre 9" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre10.png" alt="Arbre 10" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre11.png" alt="Arbre 11" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre12.png" alt="Arbre 12" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre13.png" alt="Arbre 13" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre14.png" alt="Arbre 14" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre15.png" alt="Arbre 15" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
-  
-  <a href="index.html" class="arbre-item">
-    <img src="arbre16.png" alt="Arbre 16" class="arbre-img">
-    <div class="arbre-overlay">
-      <div class="scroll-container">
-        <span class="scroll-text">
-          Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • Avec le temps les paysages avancent • 
-        </span>
-      </div>
-    </div>
-  </a>
 </div>
-
 </div>
 </body>
 </html>
