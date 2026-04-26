@@ -23,14 +23,22 @@ body {
   position: relative;
   display: block;
   cursor: pointer;
+  overflow: hidden;
 }
 .arbre-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, opacity 0.3s ease;
   display: block;
+}
+.pixel-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 .arbre-overlay {
   position: absolute;
@@ -41,6 +49,7 @@ body {
   align-items: center;
   overflow: hidden;
   background: transparent;
+  z-index: 2;
 }
 .scroll-container {
   display: flex;
@@ -97,22 +106,13 @@ body {
 .arbre-item:nth-child(15) .scroll-container { animation-delay: -84s; }
 .arbre-item:nth-child(16) .scroll-container { animation-delay: -3s; }
 
-.arbre-img:hover {
-  transform: scale(1.02);
-  opacity: 0.7;
-}
-
 @media (max-width: 768px) {
   .grid-arbre {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(8, 160px);
   }
-  .scroll-text {
-    font-size: 11px;
-  }
-  .scroll-container {
-    animation-duration: 80s;
-  }
+  .scroll-text { font-size: 11px; }
+  .scroll-container { animation-duration: 80s; }
 }
 </style>
 </head>
@@ -122,6 +122,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre1.png" alt="Arbre 1" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -130,6 +131,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre2.png" alt="Arbre 2" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -138,6 +140,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre3.png" alt="Arbre 3" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -146,6 +149,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre4.png" alt="Arbre 4" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -154,6 +158,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre5.png" alt="Arbre 5" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -162,6 +167,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre6.png" alt="Arbre 6" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -170,6 +176,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre7.png" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -178,6 +185,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre8.png" alt="Arbre 8" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -186,6 +194,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre9.png" alt="Arbre 9" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -194,6 +203,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre10.png" alt="Arbre 10" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -202,6 +212,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre11.png" alt="Arbre 11" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -210,6 +221,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre12.png" alt="Arbre 12" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -218,6 +230,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre13.png" alt="Arbre 13" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -226,6 +239,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre14.png" alt="Arbre 14" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -234,6 +248,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre15.png" alt="Arbre 15" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -242,6 +257,7 @@ body {
 
   <a href="#" onclick="goBack(); return false;" class="arbre-item">
     <img src="arbre16.png" alt="Arbre 16" class="arbre-img">
+    <canvas class="pixel-canvas"></canvas>
     <div class="arbre-overlay"><div class="scroll-container">
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
       <span class="scroll-text">Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp; Avec le temps les paysages avancent &nbsp;&nbsp;&nbsp;</span>
@@ -255,6 +271,83 @@ body {
 function goBack() {
   window.location.href = 'index.html?from=arbre';
 }
+
+/* ── ÉTOILES BLANCHES EN CONTINU ── */
+// Chaque image a ses propres étoiles qui apparaissent et disparaissent lentement
+
+const STAR_SIZE    = 2;      // taille en px — tout petit comme une étoile
+const STAR_COUNT   = 18;     // nombre d'étoiles simultanées par image
+const LIFE_MIN     = 3000;   // durée de vie min d'une étoile (ms)
+const LIFE_MAX     = 7000;   // durée de vie max (ms)
+const FADE_DURATION = 1200;  // durée du fondu entrée/sortie (ms)
+
+document.querySelectorAll('.arbre-item').forEach(function(item) {
+  const canvas = item.querySelector('.pixel-canvas');
+  const ctx    = canvas.getContext('2d');
+
+  // initialise les dimensions après rendu
+  function resize() {
+    canvas.width  = item.offsetWidth;
+    canvas.height = item.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // pool d'étoiles
+  const stars = [];
+
+  function createStar() {
+    const born = performance.now();
+    const life = LIFE_MIN + Math.random() * (LIFE_MAX - LIFE_MIN);
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      born: born,
+      life: life,
+      dead: false
+    };
+  }
+
+  // initialise avec des étoiles décalées dans le temps
+  for (let i = 0; i < STAR_COUNT; i++) {
+    const s = createStar();
+    // décale leur naissance pour éviter qu'elles apparaissent toutes en même temps
+    s.born -= Math.random() * LIFE_MAX;
+    stars.push(s);
+  }
+
+  function loop(now) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < stars.length; i++) {
+      const s   = stars[i];
+      const age = now - s.born;
+
+      if (age > s.life) {
+        // recycle l'étoile
+        stars[i] = createStar();
+        continue;
+      }
+
+      // calcul opacité : fondu entrant puis sortant
+      let opacity = 1;
+      if (age < FADE_DURATION) {
+        opacity = age / FADE_DURATION;
+      } else if (age > s.life - FADE_DURATION) {
+        opacity = (s.life - age) / FADE_DURATION;
+      }
+
+      ctx.globalAlpha = opacity;
+      ctx.fillStyle   = 'white';
+      ctx.fillRect(s.x, s.y, STAR_SIZE, STAR_SIZE);
+    }
+
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(loop);
+  }
+
+  requestAnimationFrame(loop);
+});
 </script>
 </body>
 </html>
