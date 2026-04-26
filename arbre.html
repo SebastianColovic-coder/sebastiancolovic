@@ -253,9 +253,7 @@ body {
 
 <script>
 function goBack() {
-  // On mémorise qu'on vient d'arbre.html
-  sessionStorage.setItem('fromArbre', 'true');
-  history.back();
+  window.location.href = 'index.html?from=arbre';
 }
 </script>
 </body>
