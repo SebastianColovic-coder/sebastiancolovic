@@ -227,10 +227,8 @@ img[alt="Photo 8"] { cursor:pointer !important; }
 </div>
 
 <script>
-  // Si on revient depuis arbre.html, scroll vers une position aléatoire
   window.addEventListener('load', function() {
-    if (sessionStorage.getItem('fromArbre') === 'true') {
-      sessionStorage.removeItem('fromArbre');
+    if (window.location.search.includes('from=arbre')) {
       var maxScroll = document.body.scrollHeight - window.innerHeight;
       var randomPos = Math.floor(Math.random() * maxScroll);
       window.scrollTo({ top: randomPos, behavior: 'instant' });
