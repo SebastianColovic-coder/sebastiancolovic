@@ -272,79 +272,155 @@ function goBack() {
   window.location.href = 'index.html?from=arbre';
 }
 
-/* ── ÉTOILES BLANCHES EN CONTINU ── */
-// Chaque image a ses propres étoiles qui apparaissent et disparaissent lentement
+/* ══════════════════════════════════════════
+   DISSOLUTION EN PIXELS BLANCS — BOUCLE
+   Chaque image a son propre cycle, décalé.
+   
+   Phase 1 : les pixels apparaissent un à un (lentement)
+   Phase 2 : pause — tout blanc
+   Phase 3 : les pixels disparaissent un à un
+   Phase 4 : pause — image visible
+   … puis recommence
+══════════════════════════════════════════ */
 
-const STAR_SIZE    = 2;      // taille en px — tout petit comme une étoile
-const STAR_COUNT   = 18;     // nombre d'étoiles simultanées par image
-const LIFE_MIN     = 3000;   // durée de vie min d'une étoile (ms)
-const LIFE_MAX     = 7000;   // durée de vie max (ms)
-const FADE_DURATION = 1200;  // durée du fondu entrée/sortie (ms)
+const PIXEL_SIZE     = 2;      // taille des pixels en px (petit = étoile)
+const FILL_DURATION  = 18000;  // ms pour recouvrir complètement l'image
+const HOLD_WHITE     = 3000;   // ms de pause en blanc
+const CLEAR_DURATION = 18000;  // ms pour révéler à nouveau l'image
+const HOLD_IMAGE     = 5000;   // ms de pause image visible
 
-document.querySelectorAll('.arbre-item').forEach(function(item) {
+document.querySelectorAll('.arbre-item').forEach(function(item, index) {
   const canvas = item.querySelector('.pixel-canvas');
   const ctx    = canvas.getContext('2d');
 
-  // initialise les dimensions après rendu
   function resize() {
     canvas.width  = item.offsetWidth;
     canvas.height = item.offsetHeight;
   }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', function() {
+    resize();
+    buildGrid();
+  });
 
-  // pool d'étoiles
-  const stars = [];
+  let grid    = [];   // liste ordonnée de toutes les cellules
+  let filled  = 0;    // nb de cellules blanches actuellement
+  let phase   = 'fill'; // fill | holdWhite | clear | holdImage
+  let lastTime = null;
+  let cycleProgress = 0; // 0→1 dans la phase courante
 
-  function createStar() {
-    const born = performance.now();
-    const life = LIFE_MIN + Math.random() * (LIFE_MAX - LIFE_MIN);
-    return {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      born: born,
-      life: life,
-      dead: false
-    };
+  function buildGrid() {
+    const cols = Math.ceil(canvas.width  / PIXEL_SIZE);
+    const rows = Math.ceil(canvas.height / PIXEL_SIZE);
+    const cells = [];
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        cells.push({ x: c * PIXEL_SIZE, y: r * PIXEL_SIZE });
+      }
+    }
+    // mélange aléatoire — ordre d'apparition/disparition
+    for (let i = cells.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cells[i], cells[j]] = [cells[j], cells[i]];
+    }
+    grid = cells;
+    filled = 0;
   }
 
-  // initialise avec des étoiles décalées dans le temps
-  for (let i = 0; i < STAR_COUNT; i++) {
-    const s = createStar();
-    // décale leur naissance pour éviter qu'elles apparaissent toutes en même temps
-    s.born -= Math.random() * LIFE_MAX;
-    stars.push(s);
+  buildGrid();
+
+  // décalage de départ différent pour chaque image
+  // les 16 images sont à des stades différents du cycle
+  const totalCycle = FILL_DURATION + HOLD_WHITE + CLEAR_DURATION + HOLD_IMAGE;
+  let elapsed = (index / 16) * totalCycle;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    for (let i = 0; i < filled; i++) {
+      ctx.fillRect(grid[i].x, grid[i].y, PIXEL_SIZE, PIXEL_SIZE);
+    }
   }
 
   function loop(now) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (!lastTime) lastTime = now;
+    const delta = now - lastTime;
+    lastTime = now;
+    elapsed += delta;
 
-    for (let i = 0; i < stars.length; i++) {
-      const s   = stars[i];
-      const age = now - s.born;
+    const total = grid.length;
 
-      if (age > s.life) {
-        // recycle l'étoile
-        stars[i] = createStar();
-        continue;
+    if (phase === 'fill') {
+      // combien de pixels allumer
+      const target = Math.floor((elapsed / FILL_DURATION) * total);
+      filled = Math.min(target, total);
+      if (elapsed >= FILL_DURATION) {
+        filled = total;
+        phase = 'holdWhite';
+        elapsed = 0;
       }
 
-      // calcul opacité : fondu entrant puis sortant
-      let opacity = 1;
-      if (age < FADE_DURATION) {
-        opacity = age / FADE_DURATION;
-      } else if (age > s.life - FADE_DURATION) {
-        opacity = (s.life - age) / FADE_DURATION;
+    } else if (phase === 'holdWhite') {
+      filled = total;
+      if (elapsed >= HOLD_WHITE) {
+        // reconstruire un ordre aléatoire pour la disparition
+        buildGrid();
+        filled = total;
+        phase = 'clear';
+        elapsed = 0;
       }
 
-      ctx.globalAlpha = opacity;
-      ctx.fillStyle   = 'white';
-      ctx.fillRect(s.x, s.y, STAR_SIZE, STAR_SIZE);
+    } else if (phase === 'clear') {
+      // on efface les pixels dans l'ordre inverse
+      const remaining = Math.floor((elapsed / CLEAR_DURATION) * total);
+      filled = Math.max(total - remaining, 0);
+      if (elapsed >= CLEAR_DURATION) {
+        filled = 0;
+        phase = 'holdImage';
+        elapsed = 0;
+      }
+
+    } else if (phase === 'holdImage') {
+      filled = 0;
+      if (elapsed >= HOLD_IMAGE) {
+        buildGrid();
+        phase = 'fill';
+        elapsed = 0;
+      }
     }
 
-    ctx.globalAlpha = 1;
+    draw();
     requestAnimationFrame(loop);
   }
+
+  // démarre avec le bon décalage de phase selon l'index
+  // on simule le temps écoulé en positionnant directement la phase
+  (function initPhase() {
+    let t = (index / 16) * totalCycle;
+    if (t < FILL_DURATION) {
+      phase = 'fill';
+      elapsed = t;
+    } else {
+      t -= FILL_DURATION;
+      if (t < HOLD_WHITE) {
+        phase = 'holdWhite';
+        elapsed = t;
+        filled = grid.length;
+      } else {
+        t -= HOLD_WHITE;
+        if (t < CLEAR_DURATION) {
+          phase = 'clear';
+          elapsed = t;
+          filled = grid.length;
+        } else {
+          t -= CLEAR_DURATION;
+          phase = 'holdImage';
+          elapsed = t;
+          filled = 0;
+        }
+      }
+    }
+  })();
 
   requestAnimationFrame(loop);
 });
