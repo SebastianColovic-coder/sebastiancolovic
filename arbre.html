@@ -272,89 +272,177 @@ function goBack() {
   window.location.href = 'index.html?from=arbre';
 }
 
-const PIXEL_SIZE     = 2;
-const INITIAL_DELAY  = 10000;   // 10s avant que quoi que ce soit commence
-const RANDOM_EXTRA   = 60000;   // chaque image démarre à un moment aléatoire dans cette fenêtre
-const FILL_DURATION  = 900000;  // 2.5 min pour recouvrir
-const HOLD_WHITE     = 20000;   // 20s pause blanc
-const CLEAR_DURATION = 900000;  // 2.5 min pour révéler
-const HOLD_IMAGE     = 40000;   // 40s pause image visible
+/* ══════════════════════════════════════════
+   MÉTÉO → PARAMÈTRES PIXELS
+   
+   Bruxelles : lat=50.85, lon=4.35
+   API Open-Meteo, code WMO :
+   0        = soleil clair
+   1,2,3    = nuages partiels à couverts
+   45,48    = brouillard
+   51-67    = bruine / pluie légère
+   71-77    = neige
+   80-82    = averses
+   95-99    = orage
+══════════════════════════════════════════ */
 
-document.querySelectorAll('.arbre-item').forEach(function(item) {
-  const canvas = item.querySelector('.pixel-canvas');
-  const ctx    = canvas.getContext('2d');
+// Paramètres par condition météo
+// fill_duration : ms pour recouvrir (plus long = plus lent)
+// hold_white    : pause blanc
+// clear_duration: ms pour révéler
+// hold_image    : pause image visible
+// pixel_size    : taille des pixels (plus petit = plus subtil)
 
-  function resize() {
-    canvas.width  = item.offsetWidth;
-    canvas.height = item.offsetHeight;
+const WEATHER_PARAMS = {
+  sun: {
+    label:          'soleil',
+    fill_duration:  1800000,  // 30 min — très lent, quasi invisible
+    hold_white:     30000,
+    clear_duration: 1800000,
+    hold_image:     120000,
+    pixel_size:     1         // minuscule
+  },
+  clouds: {
+    label:          'nuages',
+    fill_duration:  900000,   // 15 min
+    hold_white:     20000,
+    clear_duration: 900000,
+    hold_image:     60000,
+    pixel_size:     2
+  },
+  fog: {
+    label:          'brouillard',
+    fill_duration:  1200000,  // 20 min — lent et uniforme
+    hold_white:     60000,    // longue pause blanche comme le brouillard
+    clear_duration: 1200000,
+    hold_image:     30000,
+    pixel_size:     3         // plus grand = plus diffus
+  },
+  rain: {
+    label:          'pluie',
+    fill_duration:  300000,   // 5 min — plus rapide
+    hold_white:     10000,
+    clear_duration: 300000,
+    hold_image:     20000,
+    pixel_size:     2
+  },
+  storm: {
+    label:          'orage',
+    fill_duration:  120000,   // 2 min — intense
+    hold_white:     8000,
+    clear_duration: 120000,
+    hold_image:     15000,
+    pixel_size:     2
   }
-  resize();
-  window.addEventListener('resize', function() { resize(); buildGrid(); });
+};
 
-  let grid     = [];
-  let filled   = 0;
-  let phase    = 'fill';
-  let lastTime = null;
-  let elapsed  = 0;
+function getWeatherType(code) {
+  if (code === 0)                          return 'sun';
+  if (code >= 1  && code <= 3)            return 'clouds';
+  if (code === 45 || code === 48)          return 'fog';
+  if (code >= 51  && code <= 82)           return 'rain';
+  if (code >= 71  && code <= 77)           return 'rain';
+  if (code >= 95  && code <= 99)           return 'storm';
+  return 'clouds'; // fallback
+}
 
-  function buildGrid() {
-    const cols = Math.ceil(canvas.width  / PIXEL_SIZE);
-    const rows = Math.ceil(canvas.height / PIXEL_SIZE);
-    const cells = [];
-    for (let r = 0; r < rows; r++)
-      for (let c = 0; c < cols; c++)
-        cells.push({ x: c * PIXEL_SIZE, y: r * PIXEL_SIZE });
-    for (let i = cells.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [cells[i], cells[j]] = [cells[j], cells[i]];
+async function fetchWeather() {
+  try {
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=50.85&longitude=4.35&current=weather_code&timezone=Europe/Brussels';
+    const res  = await fetch(url);
+    const data = await res.json();
+    return data.current.weather_code;
+  } catch(e) {
+    console.warn('Météo indisponible, fallback nuages');
+    return 2; // nuages par défaut
+  }
+}
+
+const INITIAL_DELAY = 10000;   // 10s avant que quoi que ce soit commence
+const RANDOM_EXTRA  = 60000;   // fenêtre aléatoire de 60s entre les images
+
+fetchWeather().then(function(code) {
+  const type   = getWeatherType(code);
+  const params = WEATHER_PARAMS[type];
+
+  console.log('Météo Bruxelles :', params.label, '(code', code + ')');
+
+  document.querySelectorAll('.arbre-item').forEach(function(item) {
+    const canvas = item.querySelector('.pixel-canvas');
+    const ctx    = canvas.getContext('2d');
+    const PIXEL  = params.pixel_size;
+
+    function resize() {
+      canvas.width  = item.offsetWidth;
+      canvas.height = item.offsetHeight;
     }
-    grid = cells;
-  }
-  buildGrid();
+    resize();
+    window.addEventListener('resize', function() { resize(); buildGrid(); });
 
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'white';
-    for (let i = 0; i < filled; i++)
-      ctx.fillRect(grid[i].x, grid[i].y, PIXEL_SIZE, PIXEL_SIZE);
-  }
+    let grid     = [];
+    let filled   = 0;
+    let phase    = 'fill';
+    let lastTime = null;
+    let elapsed  = 0;
 
-  function loop(now) {
-    if (!lastTime) lastTime = now;
-    const delta = now - lastTime;
-    lastTime = now;
-    elapsed += delta;
-    const total = grid.length;
+    function buildGrid() {
+      const cols = Math.ceil(canvas.width  / PIXEL);
+      const rows = Math.ceil(canvas.height / PIXEL);
+      const cells = [];
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++)
+          cells.push({ x: c * PIXEL, y: r * PIXEL });
+      for (let i = cells.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cells[i], cells[j]] = [cells[j], cells[i]];
+      }
+      grid = cells;
+    }
+    buildGrid();
 
-    if (phase === 'fill') {
-      filled = Math.min(Math.floor((elapsed / FILL_DURATION) * total), total);
-      if (elapsed >= FILL_DURATION) { filled = total; phase = 'holdWhite'; elapsed = 0; }
-    } else if (phase === 'holdWhite') {
-      filled = total;
-      if (elapsed >= HOLD_WHITE) { buildGrid(); phase = 'clear'; elapsed = 0; }
-    } else if (phase === 'clear') {
-      filled = Math.max(total - Math.floor((elapsed / CLEAR_DURATION) * total), 0);
-      if (elapsed >= CLEAR_DURATION) { filled = 0; phase = 'holdImage'; elapsed = 0; }
-    } else if (phase === 'holdImage') {
-      filled = 0;
-      if (elapsed >= HOLD_IMAGE) { buildGrid(); phase = 'fill'; elapsed = 0; }
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'white';
+      for (let i = 0; i < filled; i++)
+        ctx.fillRect(grid[i].x, grid[i].y, PIXEL, PIXEL);
     }
 
-    draw();
-    requestAnimationFrame(loop);
-  }
+    function loop(now) {
+      if (!lastTime) lastTime = now;
+      const delta = now - lastTime;
+      lastTime = now;
+      elapsed += delta;
+      const total = grid.length;
 
-  function start() {
-    filled   = 0;
-    phase    = 'fill';
-    elapsed  = 0;
-    lastTime = null;
-    requestAnimationFrame(loop);
-  }
+      if (phase === 'fill') {
+        filled = Math.min(Math.floor((elapsed / params.fill_duration) * total), total);
+        if (elapsed >= params.fill_duration) { filled = total; phase = 'holdWhite'; elapsed = 0; }
+      } else if (phase === 'holdWhite') {
+        filled = total;
+        if (elapsed >= params.hold_white) { buildGrid(); phase = 'clear'; elapsed = 0; }
+      } else if (phase === 'clear') {
+        filled = Math.max(total - Math.floor((elapsed / params.clear_duration) * total), 0);
+        if (elapsed >= params.clear_duration) { filled = 0; phase = 'holdImage'; elapsed = 0; }
+      } else if (phase === 'holdImage') {
+        filled = 0;
+        if (elapsed >= params.hold_image) { buildGrid(); phase = 'fill'; elapsed = 0; }
+      }
 
-  // 10s fixe + délai aléatoire entre 0 et 60s
-  const randomDelay = Math.random() * RANDOM_EXTRA;
-  setTimeout(start, INITIAL_DELAY + randomDelay);
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    function start() {
+      filled   = 0;
+      phase    = 'fill';
+      elapsed  = 0;
+      lastTime = null;
+      requestAnimationFrame(loop);
+    }
+
+    const randomDelay = Math.random() * RANDOM_EXTRA;
+    setTimeout(start, INITIAL_DELAY + randomDelay);
+  });
 });
 </script>
 </body>
