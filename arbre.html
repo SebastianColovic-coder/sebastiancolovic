@@ -273,14 +273,14 @@ function goBack() {
 }
 
 const PIXEL_SIZE     = 2;
-const INITIAL_DELAY  = 5000;    // 5s avant que quoi que ce soit commence
-const STAGGER        = 15000;   // décalage entre chaque image (15s)
+const INITIAL_DELAY  = 10000;   // 10s avant que quoi que ce soit commence
+const RANDOM_EXTRA   = 60000;   // chaque image démarre à un moment aléatoire dans cette fenêtre
 const FILL_DURATION  = 150000;  // 2.5 min pour recouvrir
 const HOLD_WHITE     = 20000;   // 20s pause blanc
 const CLEAR_DURATION = 150000;  // 2.5 min pour révéler
 const HOLD_IMAGE     = 40000;   // 40s pause image visible
 
-document.querySelectorAll('.arbre-item').forEach(function(item, index) {
+document.querySelectorAll('.arbre-item').forEach(function(item) {
   const canvas = item.querySelector('.pixel-canvas');
   const ctx    = canvas.getContext('2d');
 
@@ -293,10 +293,9 @@ document.querySelectorAll('.arbre-item').forEach(function(item, index) {
 
   let grid     = [];
   let filled   = 0;
-  let phase    = 'holdImage'; // démarre en pause image — rien visible
+  let phase    = 'fill';
   let lastTime = null;
   let elapsed  = 0;
-  let running  = false;
 
   function buildGrid() {
     const cols = Math.ceil(canvas.width  / PIXEL_SIZE);
@@ -346,8 +345,6 @@ document.querySelectorAll('.arbre-item').forEach(function(item, index) {
   }
 
   function start() {
-    if (running) return;
-    running  = true;
     filled   = 0;
     phase    = 'fill';
     elapsed  = 0;
@@ -355,9 +352,9 @@ document.querySelectorAll('.arbre-item').forEach(function(item, index) {
     requestAnimationFrame(loop);
   }
 
-  // délai initial global (5s) + décalage propre à chaque image
-  const delay = INITIAL_DELAY + index * STAGGER;
-  setTimeout(start, delay);
+  // 10s fixe + délai aléatoire entre 0 et 60s
+  const randomDelay = Math.random() * RANDOM_EXTRA;
+  setTimeout(start, INITIAL_DELAY + randomDelay);
 });
 </script>
 </body>
