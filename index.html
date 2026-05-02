@@ -265,7 +265,7 @@ img[alt="Photo 8"] { cursor:pointer !important; }
 
 <script>
   window.addEventListener('load', function() {
-    if (window.location.search.includes('from=arbre')) {
+    if (window.location.search.includes('from=')) {
       var maxScroll = document.body.scrollHeight - window.innerHeight;
       var randomPos = Math.floor(Math.random() * maxScroll);
       window.scrollTo({ top: randomPos, behavior: 'instant' });
