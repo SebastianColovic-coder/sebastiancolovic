@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Titre de la série 2 — Sebastian Colovic</title>
+  <title>Série 2 — Sebastian Colovic</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="plein">
 
   <header class="entete">
     <a class="nom" href="index.html">Sebastian Colovic</a>
@@ -19,16 +19,23 @@
   </header>
 
   <main>
-    <figure>
-      <img src="images/serie-2/01.jpg" alt="Série 2, photo 1">
-    </figure>
+    <!-- Chaque bloc <section class="ecran"> = un écran.
+         Pour ajouter une photo seule : copie un bloc, change le numéro du fichier.
+         Les photos qui n'existent pas encore sont cachées automatiquement. -->
+    <section class="ecran">
+      <figure><img src="images/serie-2/01.jpg" alt="Série 2, photo 1"></figure>
+    </section>
 
-    <div class="duo">
-      <figure><img src="images/serie-2/02.jpg" alt="Série 2, photo 2"></figure>
-      <figure><img src="images/serie-2/03.jpg" alt="Série 2, photo 3"></figure>
-    </div>
+    <section class="ecran">
+      <div class="duo">
+        <figure><img src="images/serie-2/02.jpg" alt="Série 2, photo 2"></figure>
+        <figure><img src="images/serie-2/03.jpg" alt="Série 2, photo 3"></figure>
+      </div>
+    </section>
 
-    <figure><img src="images/serie-2/04.jpg" alt="Série 2, photo 4"></figure>
+    <section class="ecran">
+      <figure><img src="images/serie-2/04.jpg" alt="Série 2, photo 4"></figure>
+    </section>
   </main>
 
   <footer class="pied">© Sebastian Colovic</footer>

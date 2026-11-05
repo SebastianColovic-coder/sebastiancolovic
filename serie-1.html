@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Titre de la série 1 — Sebastian Colovic</title>
+  <title>Série 1 — Sebastian Colovic</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="plein">
 
   <header class="entete">
     <a class="nom" href="index.html">Sebastian Colovic</a>
@@ -19,25 +19,31 @@
   </header>
 
   <main>
-    <!-- Une photo pleine largeur -->
-    <figure>
-      <img src="images/serie-1/01.jpg" alt="Série 1, photo 1">
-    </figure>
+    <!-- Chaque bloc <section class="ecran"> = un écran.
+         Pour ajouter une photo seule : copie un bloc, change le numéro du fichier.
+         Les photos qui n'existent pas encore sont cachées automatiquement. -->
+    <section class="ecran">
+      <figure><img src="images/serie-1/01.jpg" alt="Série 1, photo 1"></figure>
+    </section>
 
-    <!-- Deux photos côte à côte -->
-    <div class="duo">
-      <figure><img src="images/serie-1/02.jpg" alt="Série 1, photo 2"></figure>
-      <figure><img src="images/serie-1/03.jpg" alt="Série 1, photo 3"></figure>
-    </div>
+    <section class="ecran">
+      <div class="duo">
+        <figure><img src="images/serie-1/02.jpg" alt="Série 1, photo 2"></figure>
+        <figure><img src="images/serie-1/03.jpg" alt="Série 1, photo 3"></figure>
+      </div>
+    </section>
 
-    <!-- Une photo plus petite, centrée (pour un portrait par exemple) -->
-    <figure class="petite">
-      <img src="images/serie-1/04.jpg" alt="Série 1, photo 4">
-    </figure>
+    <section class="ecran">
+      <figure class="petite"><img src="images/serie-1/04.jpg" alt="Série 1, photo 4"></figure>
+    </section>
 
-    <!-- Pour en ajouter : copie un bloc <figure> et change le nom du fichier -->
-    <figure><img src="images/serie-1/05.jpg" alt="Série 1, photo 5"></figure>
-    <figure><img src="images/serie-1/06.jpg" alt="Série 1, photo 6"></figure>
+    <section class="ecran">
+      <figure><img src="images/serie-1/05.jpg" alt="Série 1, photo 5"></figure>
+    </section>
+
+    <section class="ecran">
+      <figure><img src="images/serie-1/06.jpg" alt="Série 1, photo 6"></figure>
+    </section>
   </main>
 
   <footer class="pied">© Sebastian Colovic</footer>
